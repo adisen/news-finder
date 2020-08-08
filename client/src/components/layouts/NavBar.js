@@ -1,40 +1,59 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { logoutUser } from "../../actions/authActions";
 
-const NavBar = () => {
+import logo from "../../assets/img/logo.png";
+
+const NavBar = props => {
+  const onLogoutClick = e => {
+    e.preventDefault();
+    props.logoutUser();
+  };
+
   return (
-    <nav className='navbar navbar-dark bg-dark'>
+    <nav className='navbar navbar-dark bg-danger'>
       <div className='container'>
         <Link className='navbar-brand' to='/'>
-          News Search
+          <img src={logo} className='img' style={{ width: "40%" }} alt='logo' />
         </Link>
-        {/* <button
-        class='navbar-toggler'
-        type='button'
-        data-toggle='collapse'
-        data-target='#navbarText'
-        aria-controls='navbarText'
-        aria-expanded='false'
-        aria-label='Toggle navigation'>
-        <span class='navbar-toggler-icon'></span>
-      </button> */}
-        {/* <div class='navbar' id='navbarText'>
-          <ul class='navbar-nav mr-auto'>
-            <li class='nav-item active'>
-              <Link class='nav-link' href='#'>
-                Home <span class='sr-only'>(current)</span>
+        <div className='row'>
+          <div className='col-sm'>
+            <Link to='/' className='nav-link text-white'>
+              Home
+            </Link>
+          </div>
+          {props.auth.isAuthenticated ? (
+            <div className='col-sm'>
+              <Link
+                to='/register'
+                className='nav-link text-white'
+                onClick={onLogoutClick}>
+                Logout
               </Link>
-            </li>
-            <li class='nav-item'>
-              <Link class='nav-link' to='/about'>
-                About
-              </Link>
-            </li>
-          </ul>
-        </div> */}
+            </div>
+          ) : (
+            <Fragment>
+              <div className='col-sm'>
+                <Link to='/login' className='nav-link text-white'>
+                  Login
+                </Link>
+              </div>
+              <div className='col-sm'>
+                <Link to='/register' className='nav-link text-white'>
+                  Register
+                </Link>
+              </div>
+            </Fragment>
+          )}
+        </div>
       </div>
     </nav>
   );
 };
 
-export default NavBar;
+const mapStateToProps = state => ({
+  auth: state.auth,
+});
+
+export default connect(mapStateToProps, { logoutUser })(NavBar);

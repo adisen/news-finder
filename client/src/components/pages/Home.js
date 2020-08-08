@@ -24,9 +24,9 @@ class Home extends Component {
   render() {
     return (
       <div>
-        <h2 className='mt-3'>Welcome to the News Search App</h2>
+        <h2 className='mt-5'>Welcome to the News Search App</h2>
         <form onSubmit={this.onSubmit}>
-          <div className='input-group input-group-lg mb-3'>
+          <div className='input-group mb-3'>
             <input
               value={this.state.text}
               onChange={this.onChange}
@@ -40,7 +40,7 @@ class Home extends Component {
           </div>
           <button
             type='submit'
-            className='btn btn-primary btn-lg btn-block mt-3'>
+            className='btn btn-danger btn-lg btn-block mt-3'>
             Search
           </button>
         </form>

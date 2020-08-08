@@ -1,6 +1,7 @@
 const express = require("express");
 const connectDB = require("./config/db");
 const passport = require("passport");
+require("dotenv").config();
 
 const app = express();
 
@@ -17,6 +18,7 @@ require("./config/passport")(passport);
 
 // Routes
 app.use("/api/users", require("./routes/api/users"));
+app.use("/api/news", require("./routes/api/news"));
 
 const PORT = process.env.PORT || 5000;
 
