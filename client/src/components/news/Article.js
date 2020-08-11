@@ -3,12 +3,15 @@ import { Link } from "react-router-dom";
 import moment from "moment";
 
 import Spinner from "../layouts/Spinner";
+import Author from "../author/Author";
 
 moment().format();
 
 class Article extends Component {
   componentDidMount() {
-    this.props.getArticle(this.props.location.state.link);
+    const { link, author, company } = this.props.location.state;
+    this.props.getArticle(link);
+    this.props.getAuthor(author, company);
     // console.log(this.props.location.state.link);
   }
 
@@ -18,8 +21,8 @@ class Article extends Component {
       title,
       primary_author,
       date_published,
-      snippet,
       primary_image_link,
+      body,
     } = this.props.article;
 
     if (this.props.loading) {
@@ -27,32 +30,40 @@ class Article extends Component {
     }
 
     return (
-      <Fragment>
+      <div style={{ background: "#FCFCFC" }}>
         <Link to='/' className='btn btn-secondary mt-4'>
+          <i className='fas fa-arrow-left'></i>
+          {"  "}
           Go back Home
         </Link>
         {this.props.loading ? (
           <h1>Loading...</h1>
         ) : (
-          <div className='card mt-5'>
-            <div className='card-body'>
+          <div className='row mt-5'>
+            <div className='col-lg-8 col-sm-12'>
+              <h5 className='mb-5 text-dark'>
+                <i className='far fa-calendar-alt red-icon mr-2'></i>
+                {"  "}
+                <strong>Date Published:</strong>{" "}
+                {moment(date_published).format("DD-MM-YYYY")}
+              </h5>
               <img
                 src={primary_image_link}
-                className='img-thumbnail card-img-top'
+                className='img-fluid mb-5'
                 alt='Post'
-                style={{ width: "50%", height: "50%" }}
               />
-              <h3 className='font-weight-bold'>{title}</h3>
-              <h5 className='font-weight-bold'>{primary_author}</h5>
-              {/* <p>{moment().toNow}</p> */}
-              <p>{snippet}</p>
-              <a href={link} target='__blank'>
-                Read more
-              </a>
+              <h3 className='font-weight-bold mb-4'>{title}</h3>
+              <h5 className='font-weight-bold mb-4 text-muted'>
+                Author: {primary_author}
+              </h5>
+              <p className='text-dark'>{body}</p>
+            </div>
+            <div className='col-lg'>
+              <Author author={this.props.author} />
             </div>
           </div>
         )}
-      </Fragment>
+      </div>
     );
   }
 }

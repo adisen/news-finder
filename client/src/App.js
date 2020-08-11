@@ -10,6 +10,7 @@ import setAuthToken from "./utils/setAuthToken";
 import { setCurrentUser, logoutUser } from "./actions/authActions";
 
 import NavBar from "./components/layouts/NavBar";
+import Footer from "./components/layouts/Footer";
 import Home from "./components/pages/Home";
 import Article from "./components/news/Article";
 import Login from "./components/auth/Login";
@@ -46,7 +47,7 @@ class App extends Component {
     articles: [],
     article: {},
     loading: false,
-    profiles: [],
+    author: {},
   };
 
   // Get trending articles
@@ -98,36 +99,23 @@ class App extends Component {
   };
 
   // Search author's profile
-  profileSearch = async (name, company) => {
+  getAuthor = async (name, company) => {
     const params = {
-      api_key: "",
-      name: { name },
-      company: { company },
+      name,
+      company,
     };
+
+    this.setState({ loading: true });
+
     try {
-      const res = await axios.get("https://api.rocketreach.co/v1/api/search", {
+      const res = await axios.get("/api/author/", {
         params,
       });
-      console.log(res.data);
-      this.setState({ profiles: res.data });
-    } catch (error) {}
-  };
-
-  authorSearch = async id => {
-    const params = {
-      api_key: "",
-      id: { id },
-    };
-    try {
-      const res = await axios.get(
-        "https://api.rocketreach.co/v1/api/lookupProfile",
-        {
-          params,
-        }
-      );
-      console.log(res.data);
-      this.setState({ profiles: res.data });
-    } catch (error) {}
+      console.log(res.data.author);
+      this.setState({ author: res.data.author, loading: false });
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   render() {
@@ -152,12 +140,15 @@ class App extends Component {
                 <PrivateRoute
                   path='/article/:link'
                   getArticle={this.getArticle}
+                  getAuthor={this.getAuthor}
                   article={this.state.article}
+                  author={this.state.author}
                   loading={this.state.loading}
                   component={Article}
                 />
               </Switch>
             </div>
+            <Footer />
           </Fragment>
         </Router>
       </Provider>

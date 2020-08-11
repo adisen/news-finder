@@ -7,6 +7,7 @@ class Home extends Component {
   componentDidMount() {
     this.props.initialLoad();
   }
+
   state = {
     text: "",
   };
@@ -23,26 +24,32 @@ class Home extends Component {
 
   render() {
     return (
-      <div>
-        <h2 className='mt-5'>Welcome to the News Search App</h2>
-        <form onSubmit={this.onSubmit}>
-          <div className='input-group mb-3'>
-            <input
-              value={this.state.text}
-              onChange={this.onChange}
-              type='text'
-              name='text'
-              className='form-control mt-3'
-              placeholder='Please enter your search query'
-              aria-label='Sizing example input'
-              aria-describedby='inputGroup-sizing-default'
-            />
+      <div className='mt-5'>
+        <h2 className='mt-5 text-dark text-center'>
+          <strong>Search your favorite Article</strong>
+        </h2>
+        <form onSubmit={this.onSubmit} className='mb-5'>
+          <div className='row justify-content-md-center'>
+            <div className='col-8'>
+              <input
+                value={this.state.text}
+                onChange={this.onChange}
+                type='text'
+                name='text'
+                className='form-control mt-3 search-input'
+                placeholder='Search Articles'
+              />
+            </div>
+            <div className='col-2'>
+              <button
+                type='submit'
+                className='btn btn-danger mt-3 search-button'
+              >
+                <i className='fas fa-search'></i>
+                {"  "}Search
+              </button>
+            </div>
           </div>
-          <button
-            type='submit'
-            className='btn btn-danger btn-lg btn-block mt-3'>
-            Search
-          </button>
         </form>
 
         {this.props.loading ? <Spinner /> : <News news={this.props.news} />}

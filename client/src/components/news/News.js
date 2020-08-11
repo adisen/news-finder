@@ -4,12 +4,14 @@ import NewsItem from "./NewsItem";
 
 const News = ({ news }) => {
   return (
-    <div className='mt-3'>
-      {news.length > 0
-        ? news.map(details => (
-            <NewsItem key={details.title} details={details} />
-          ))
-        : null}
+    <div>
+      <div className='mt-3 row justify-content-between'>
+        {news.length > 0
+          ? news.map(details => (
+              <NewsItem key={details.title} details={details} />
+            ))
+          : null}
+      </div>
     </div>
   );
 };

@@ -12,15 +12,15 @@ router.get("/trending", async (req, res) => {
     locale: "en-US",
     q: "trending",
   };
-  // try {
-  //   const response = await axios.get("https://api.breakingapi.com/news", {
-  //     params,
-  //   });
+  try {
+    const response = await axios.get("https://api.breakingapi.com/news", {
+      params,
+    });
 
-  //   res.json({ articles: response.data.articles });
-  // } catch (error) {
-  //   console.error(error);
-  // }
+    res.json({ articles: response.data.articles });
+  } catch (error) {
+    console.error(error);
+  }
 });
 
 // @route   GET api/news/search
