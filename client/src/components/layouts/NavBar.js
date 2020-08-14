@@ -12,48 +12,81 @@ const NavBar = props => {
   };
 
   return (
-    <nav className='navbar navbar-light'>
-      <div className='container'>
-        <Link className='navbar-brand' to='/'>
-          <img src={logo} className='img' width='200' alt='logo' />
-        </Link>
+    <nav className='navbar navbar-expand-lg shadow bg-light pl-0'>
+      <Link className='navbar-brand  ' to='/'>
+        <img src={logo} className='img ml-3' width='150' alt='logo' />
+      </Link>
+      <button
+        className='navbar-toggler'
+        type='button'
+        data-toggle='collapse'
+        data-target='#navbarSupportedContent'
+        aria-controls='navbarSupportedContent'
+        aria-expanded='false'
+        aria-label='Toggle navigation'
+      >
+        <i className='fas fa-bars navbar-toggler-icon'></i>
+      </button>
 
-        <div className='row'>
-          <div className='col-sm'>
+      <div className='collapse navbar-collapse' id='navbarSupportedContent'>
+        <ul className='navbar-nav ml-auto '>
+          <li className='nav-item active'>
             <Link to='/' className='nav-link text-dark'>
               <strong>Home</strong>
+              <span className='sr-only'>(current)</span>
             </Link>
-          </div>
-          <div className='col-sm'>
+          </li>
+          <li className='nav-item'>
             <Link to='/' className='nav-link text-dark'>
               <strong>FAQS</strong>
             </Link>
-          </div>
+          </li>
+
           {props.auth.isAuthenticated ? (
-            <div className='col-sm'>
+            <li className='nav-item dropdown'>
               <Link
-                to='/register'
-                className='nav-link text-dark'
-                onClick={onLogoutClick}
+                className='nav-link dropdown-toggle text-dark'
+                to='#'
+                id='navbarDropdown'
+                role='button'
+                data-toggle='dropdown'
+                aria-haspopup='true'
+                aria-expanded='false'
               >
-                <strong>Logout</strong>
+                <strong>{props.auth.user.name}</strong>
               </Link>
-            </div>
+              <div className='dropdown-menu' aria-labelledby='navbarDropdown'>
+                <Link
+                  to='/register'
+                  className='dropdown-item text-dark'
+                  onClick={onLogoutClick}
+                  role='button'
+                >
+                  <strong>Logout</strong>
+                </Link>
+              </div>
+            </li>
           ) : (
             <Fragment>
-              <div className='col-sm'>
-                <Link to='/login' className='nav-link text-dark'>
+              <li className='nav-item ml-3'>
+                <Link
+                  to='/login'
+                  className='nav-link text-light btn btn-dark btn-round'
+                >
                   <strong>Login</strong>
                 </Link>
-              </div>
-              <div className='col-sm'>
-                <Link to='/register' className='nav-link text-dark'>
-                  <strong>Register</strong>
+              </li>
+              <li className='nav-item ml-3'>
+                <Link
+                  to='/register'
+                  className='nav-link text-light btn btn-dark btn-round pl-4 pr-4'
+                >
+                  <strong>Join Newz Jacking</strong>
                 </Link>
-              </div>
+              </li>
             </Fragment>
           )}
-        </div>
+        </ul>
       </div>
     </nav>
   );

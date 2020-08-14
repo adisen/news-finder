@@ -17,14 +17,11 @@ router.get("/", async (req, res) => {
       `https://api.rocketreach.co/v1/api/lookupProfile?api_key=${query.api_key}&name=${query.name}&current_employer=${query.company}`
     );
 
-    if (res.status === "404") {
-      return res.json({ author: null });
-    }
-
     console.log(resp.data);
     res.json({ author: resp.data[0] });
   } catch (error) {
-    console.error(error);
+    res.json({ author: {} });
+    // console.error(error);
   }
 });
 

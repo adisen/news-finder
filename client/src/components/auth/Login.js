@@ -5,6 +5,9 @@ import { connect } from "react-redux";
 import { loginUser } from "../../actions/authActions";
 import classnames from "classnames";
 
+import NavBar from "../layouts/NavBar";
+import Footer from "../layouts/Footer";
+
 class Login extends Component {
   constructor() {
     super();
@@ -51,53 +54,58 @@ class Login extends Component {
   render() {
     const { errors } = this.state;
     return (
-      <div className='mt-5'>
-        <h1 className='mb-3'>
-          Login <span>Below</span>
-        </h1>
-        <p className='text-muted'>
-          Don't have an acount? <Link to='/register'>Register</Link>
-        </p>
-        <form noValidate onSubmit={this.onSubmit}>
-          <div className='form-group'>
-            <label htmlFor='email'>Email address</label>
-            <input
-              type='email'
-              onChange={this.onChange}
-              value={this.state.email}
-              id='email'
-              aria-describedby='emailHelp'
-              className={classnames("form-control", {
-                invalid: errors.email || errors.emailnotfound,
-              })}
-            />
-            <span className='text-danger'>
-              {errors.email}
-              {errors.emailnotfound}
-            </span>
-          </div>
-          <div className='form-group'>
-            <label htmlFor='password'>Password</label>
-            <input
-              type='password'
-              onChange={this.onChange}
-              value={this.state.password}
-              id='password'
-              className={classnames("form-control", {
-                invalid: errors.password || errors.passwordincorrect,
-              })}
-            />
-            <span className='text-danger'>
-              {errors.password}
-              {errors.passwordincorrect}
-            </span>
-          </div>
-          <button
-            type='submit'
-            className='btn btn-danger mt-2 pl-5 pr-5 pt-2 pb-2'>
-            Login
-          </button>
-        </form>
+      <div>
+        <NavBar />
+        <div className='mt-5 mb-5 container'>
+          <h1 className='mb-3'>
+            Login <span>Below</span>
+          </h1>
+          <p className='text-muted'>
+            Don't have an acount? <Link to='/register'>Register</Link>
+          </p>
+          <form noValidate onSubmit={this.onSubmit}>
+            <div className='form-group'>
+              <label htmlFor='email'>Email address</label>
+              <input
+                type='email'
+                onChange={this.onChange}
+                value={this.state.email}
+                id='email'
+                aria-describedby='emailHelp'
+                className={classnames("form-control", {
+                  invalid: errors.email || errors.emailnotfound,
+                })}
+              />
+              <span className='text-danger'>
+                {errors.email}
+                {errors.emailnotfound}
+              </span>
+            </div>
+            <div className='form-group'>
+              <label htmlFor='password'>Password</label>
+              <input
+                type='password'
+                onChange={this.onChange}
+                value={this.state.password}
+                id='password'
+                className={classnames("form-control", {
+                  invalid: errors.password || errors.passwordincorrect,
+                })}
+              />
+              <span className='text-danger'>
+                {errors.password}
+                {errors.passwordincorrect}
+              </span>
+            </div>
+            <button
+              type='submit'
+              className='btn btn-danger mt-2 pl-5 pr-5 pt-2 pb-2'
+            >
+              Login
+            </button>
+          </form>
+        </div>
+        <Footer />
       </div>
     );
   }

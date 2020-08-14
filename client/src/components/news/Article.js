@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import moment from "moment";
 
@@ -9,15 +9,21 @@ moment().format();
 
 class Article extends Component {
   componentDidMount() {
-    const { link, author, company } = this.props.location.state;
+    const { link } = this.props.location.state;
     this.props.getArticle(link);
-    this.props.getAuthor(author, company);
-    // console.log(this.props.location.state.link);
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.article !== prevProps.article) {
+      this.props.getAuthor(
+        this.props.article.primary_author,
+        this.props.location.state.company
+      );
+    }
   }
 
   render() {
     const {
-      link,
       title,
       primary_author,
       date_published,
@@ -30,7 +36,7 @@ class Article extends Component {
     }
 
     return (
-      <div style={{ background: "#FCFCFC" }}>
+      <div style={{ background: "#FCFCFC" }} className='px-4'>
         <Link to='/' className='btn btn-secondary mt-4'>
           <i className='fas fa-arrow-left'></i>
           {"  "}
@@ -53,13 +59,11 @@ class Article extends Component {
                 alt='Post'
               />
               <h3 className='font-weight-bold mb-4'>{title}</h3>
-              <h5 className='font-weight-bold mb-4 text-muted'>
-                Author: {primary_author}
-              </h5>
+
               <p className='text-dark'>{body}</p>
             </div>
             <div className='col-lg'>
-              <Author author={this.props.author} />
+              <Author author={this.props.author} author_name={primary_author} />
             </div>
           </div>
         )}

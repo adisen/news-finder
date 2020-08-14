@@ -9,13 +9,12 @@ import jwt_decode from "jwt-decode";
 import setAuthToken from "./utils/setAuthToken";
 import { setCurrentUser, logoutUser } from "./actions/authActions";
 
-import NavBar from "./components/layouts/NavBar";
-import Footer from "./components/layouts/Footer";
 import Home from "./components/pages/Home";
 import Article from "./components/news/Article";
 import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
 import PrivateRoute from "./utils/PrivateRoute";
+import Search from "./components/pages/Search";
 
 dotenv.config();
 
@@ -111,9 +110,10 @@ class App extends Component {
       const res = await axios.get("/api/author/", {
         params,
       });
-      console.log(res.data.author);
+      console.log(res.data);
       this.setState({ author: res.data.author, loading: false });
     } catch (error) {
+      this.setState({ loading: false });
       console.error(error);
     }
   };
@@ -123,8 +123,7 @@ class App extends Component {
       <Provider store={store}>
         <Router>
           <Fragment>
-            <NavBar />
-            <div className='container'>
+            <div className=''>
               <Route exact path='/register' component={Register} />
               <Route exact path='/login' component={Login} />
               <Switch>
@@ -138,6 +137,15 @@ class App extends Component {
                   component={Home}
                 />
                 <PrivateRoute
+                  exact
+                  path='/search'
+                  searchNews={this.searchNews}
+                  news={this.state.articles}
+                  loading={this.state.loading}
+                  initialLoad={this.initialLoad}
+                  component={Search}
+                />
+                <PrivateRoute
                   path='/article/:link'
                   getArticle={this.getArticle}
                   getAuthor={this.getAuthor}
@@ -148,7 +156,6 @@ class App extends Component {
                 />
               </Switch>
             </div>
-            <Footer />
           </Fragment>
         </Router>
       </Provider>
