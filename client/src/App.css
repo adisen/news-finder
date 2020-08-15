@@ -17,7 +17,7 @@ main {
 }
 
 .sticky-top {
-  z-index: 0 !important;
+  /* z-index: 0 !important; */
 }
 
 .search-input {

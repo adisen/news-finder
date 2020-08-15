@@ -28,7 +28,7 @@ const SideBar = () => {
             </Link>
           </li>
           <li className='nav-item'>
-            <Link className='nav-link text-light' to='/'>
+            <Link className='nav-link text-light' to='/profile'>
               <i className='fas fa-user mr-2'></i>
               <strong>Profile</strong>
             </Link>

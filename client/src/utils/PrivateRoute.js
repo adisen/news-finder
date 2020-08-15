@@ -9,7 +9,7 @@ import Footer from "../components/layouts/Footer";
 const PrivateRoute = ({ component: Component, auth, ...rest }) => (
   <div className='row'>
     <SideBar />
-    <main className=' col-md-9 ml-sm-auto col-lg-10 p-0'>
+    <main className='px-4 col-md-9 ml-sm-auto col-lg-10 p-0'>
       <NavBar />
       <Route
         {...rest}

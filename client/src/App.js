@@ -15,6 +15,7 @@ import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
 import PrivateRoute from "./utils/PrivateRoute";
 import Search from "./components/pages/Search";
+import Profile from "./components/pages/Profile";
 
 dotenv.config();
 
@@ -47,6 +48,58 @@ class App extends Component {
     article: {},
     loading: false,
     author: {},
+    trendingTopics: [
+      {
+        id: "puppy",
+        name: "Puppy",
+        locales: ["en-US", "en-GB"],
+      },
+      {
+        id: "bolivia",
+        name: "Bolivia",
+        locales: ["en-US"],
+      },
+      {
+        id: "appeal",
+        name: "Appeal",
+        locales: ["en-US"],
+      },
+      {
+        id: "united-states-department-of-homeland-security",
+        name: "United States Department of Homeland Security",
+        locales: ["en-US"],
+      },
+      {
+        id: "turkey",
+        name: "Turkey",
+        locales: ["en-US"],
+      },
+      {
+        id: "donald-trump",
+        name: "Donald Trump",
+        locales: ["en-US", "en-GB"],
+      },
+      {
+        id: "north-carolina",
+        name: "North Carolina",
+        locales: ["en-US"],
+      },
+      {
+        id: "dominican-republic",
+        name: "Dominican Republic",
+        locales: ["en-US"],
+      },
+      {
+        id: "impeachment",
+        name: "Impeachment",
+        locales: ["en-US", "en-GB"],
+      },
+      {
+        id: "recep-tayyip-erdogan",
+        name: "Recep Tayyip Erdoğan",
+        locales: ["en-US"],
+      },
+    ],
   };
 
   // Get trending articles
@@ -54,8 +107,13 @@ class App extends Component {
     this.setState({ loading: true });
 
     try {
-      const res = await axios.get("/api/news/trending");
-      this.setState({ articles: res.data.articles, loading: false });
+      const art = await axios.get("/api/news/trending");
+      const top = await axios.get("/api/news/topics");
+      this.setState({
+        articles: art.data.articles,
+        trendingTopics: top.data.trendingTopics,
+        loading: false,
+      });
     } catch (error) {
       console.error(error);
     }
@@ -134,6 +192,7 @@ class App extends Component {
                   news={this.state.articles}
                   loading={this.state.loading}
                   initialLoad={this.initialLoad}
+                  trendingTopics={this.state.trendingTopics}
                   component={Home}
                 />
                 <PrivateRoute
@@ -154,6 +213,7 @@ class App extends Component {
                   loading={this.state.loading}
                   component={Article}
                 />
+                <PrivateRoute exact path='/profile' component={Profile} />
               </Switch>
             </div>
           </Fragment>

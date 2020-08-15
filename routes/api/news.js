@@ -23,6 +23,23 @@ router.get("/trending", async (req, res) => {
   }
 });
 
+router.get("/topics", async (req, res) => {
+  const params = {
+    api_key: process.env.BREAKING_API,
+    locale: "en-US",
+  };
+
+  try {
+    const response = await axios.get("https://api.breakingapi.com/trending", {
+      params,
+    });
+
+    res.json({ trendingTopics: response.data.trending_topics });
+  } catch (error) {
+    console.error(error);
+  }
+});
+
 // @route   GET api/news/search
 // @desc    Get articles by search
 // @access  Private
