@@ -4,9 +4,9 @@ import News from "../news/News";
 import Spinner from "../layouts/Spinner";
 
 class Home extends Component {
-  // componentDidMount() {
-  //   this.props.initialLoad();
-  // }
+  componentDidMount() {
+    this.props.initialLoad();
+  }
 
   state = {
     text: "",

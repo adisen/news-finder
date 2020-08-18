@@ -71,6 +71,10 @@ main {
   box-shadow: inset -1px 0 0 rgba(0, 0, 0, 0.1);
 }
 
+.center-card {
+  width: 35%;
+}
+
 footer {
   position: absolute;
   bottom: 0;
@@ -81,5 +85,9 @@ footer {
 @media (max-width: 767.98px) {
   .sidebar {
     top: 5rem;
+  }
+
+  .center-card {
+    width: 90%;
   }
 }

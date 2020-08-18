@@ -15,6 +15,7 @@ class Login extends Component {
       email: "",
       password: "",
       errors: {},
+      loading: false,
     };
   }
 
@@ -42,13 +43,16 @@ class Login extends Component {
 
   onSubmit = e => {
     e.preventDefault();
+
+    this.setState({ loading: true });
+
     const userData = {
       email: this.state.email,
       password: this.state.password,
     };
 
     this.props.loginUser(userData);
-    // console.log(userData);
+    // this.setState({ loading: false });
   };
 
   render() {
@@ -56,7 +60,7 @@ class Login extends Component {
     return (
       <div>
         <NavBar />
-        <div className='mt-5 mb-5 container'>
+        <div className='my-5 p-5 container card center-card mx-auto'>
           <h1 className='mb-3'>
             Login <span>Below</span>
           </h1>
@@ -99,9 +103,15 @@ class Login extends Component {
             </div>
             <button
               type='submit'
-              className='btn btn-danger mt-2 pl-5 pr-5 pt-2 pb-2'
+              className='btn btn-danger btn-block mt-2 pl-5 pr-5 pt-2 pb-2'
             >
-              Login
+              {this.state.loading ? (
+                <div class='spinner-border' role='status'>
+                  <span class='sr-only'>Loading...</span>
+                </div>
+              ) : (
+                <span>Login</span>
+              )}
             </button>
           </form>
         </div>

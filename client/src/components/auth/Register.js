@@ -17,6 +17,7 @@ class Register extends Component {
       password: "",
       password2: "",
       errors: {},
+      loading: false,
     };
   }
 
@@ -42,6 +43,8 @@ class Register extends Component {
   onSubmit = e => {
     e.preventDefault();
 
+    this.setState({ loading: true });
+
     const newUser = {
       name: this.state.name,
       email: this.state.email,
@@ -50,7 +53,6 @@ class Register extends Component {
     };
 
     this.props.registerUser(newUser, this.props.history);
-    console.log(newUser);
   };
 
   render() {
@@ -59,7 +61,7 @@ class Register extends Component {
     return (
       <div className=''>
         <NavBar />
-        <div className='mt-5 mb-5 container position-relative'>
+        <div className='mt-5 mb-5 container card center-card mx-auto'>
           <h1 className='mb-3'>
             Register <span>Below</span>
           </h1>
@@ -121,13 +123,19 @@ class Register extends Component {
             </div>
             <button
               type='submit'
-              className='btn btn-danger mt-2 pl-5 pr-5 pt-2 pb-2'
+              className='btn btn-danger btn-block mt-2 pl-5 pr-5 pt-2 pb-2'
             >
-              Register
+              {this.state.loading ? (
+                <div class='spinner-border' role='status'>
+                  <span class='sr-only'>Loading...</span>
+                </div>
+              ) : (
+                <span>Register</span>
+              )}
             </button>
           </form>
         </div>
-        <Footer />
+        {/* <Footer /> */}
       </div>
     );
   }
