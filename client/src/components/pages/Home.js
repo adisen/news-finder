@@ -5,7 +5,7 @@ import Spinner from "../layouts/Spinner";
 
 class Home extends Component {
   componentDidMount() {
-    this.props.initialLoad();
+    // this.props.initialLoad();
   }
 
   state = {

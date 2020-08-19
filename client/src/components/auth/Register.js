@@ -61,7 +61,7 @@ class Register extends Component {
     return (
       <div className=''>
         <NavBar />
-        <div className='mt-5 mb-5 container card center-card mx-auto'>
+        <div className='my-5 p-5 container card center-card mx-auto'>
           <h1 className='mb-3'>
             Register <span>Below</span>
           </h1>
