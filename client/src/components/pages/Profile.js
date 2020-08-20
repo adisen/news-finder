@@ -10,7 +10,7 @@ const Profile = ({ auth }) => {
       <div className='card text-center m-auto mw-100 w-50'>
         <div className='card-body'>
           <h2>User Info </h2>
-          <img src={image} className='img-thumbnail' />
+          <img src={image} className='img-thumbnail' alt='Profile' />
           <h5>{auth.user.name}</h5>
           <h6 className='text-muted mb-5'>Senior Developer</h6>
           <p className='text-muted'>

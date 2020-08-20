@@ -28,7 +28,10 @@ const NavBar = props => {
         <i className='fas fa-bars navbar-toggler-icon'></i>
       </button>
 
-      <div className='collapse navbar-collapse' id='navbarSupportedContent'>
+      <div
+        className='collapse navbar-collapse text-center'
+        id='navbarSupportedContent'
+      >
         <ul className='navbar-nav ml-auto '>
           <li className='nav-item active'>
             <Link to='/' className='nav-link text-dark'>
@@ -71,7 +74,7 @@ const NavBar = props => {
               <li className='nav-item ml-3'>
                 <Link
                   to='/login'
-                  className='nav-link text-light btn btn-dark btn-round'
+                  className='nav-link text-light btn btn-dark mb-2 btn-round'
                 >
                   <strong>Login</strong>
                 </Link>

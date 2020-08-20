@@ -16,16 +16,7 @@ class Article extends Component {
 
   render() {
     const {
-      details: {
-        author,
-        title,
-        content,
-        description,
-        publishedAt,
-        source,
-        url,
-        urlToImage,
-      },
+      details: { author, title, content, publishedAt, url, urlToImage },
     } = this.props.location.state;
 
     const { authorDetails } = this.props;
@@ -56,6 +47,10 @@ class Article extends Component {
               <h3 className='font-weight-bold mb-4'>{title}</h3>
 
               <p className='text-dark'>{content}</p>
+
+              <a className='btn btn-primary' href={url} target='__blank'>
+                Read Original Post
+              </a>
             </div>
             <div className='col-lg'>
               <Author author={authorDetails} author_name={author} />

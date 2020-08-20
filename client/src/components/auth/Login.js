@@ -106,8 +106,8 @@ class Login extends Component {
               className='btn btn-danger btn-block mt-2 pl-5 pr-5 pt-2 pb-2'
             >
               {this.state.loading ? (
-                <div class='spinner-border' role='status'>
-                  <span class='sr-only'>Loading...</span>
+                <div className='spinner-border' role='status'>
+                  <span className='sr-only'>Loading...</span>
                 </div>
               ) : (
                 <span>Login</span>

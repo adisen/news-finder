@@ -61,7 +61,7 @@ class Register extends Component {
     return (
       <div className=''>
         <NavBar />
-        <div className='my-5 p-5 container card center-card mx-auto'>
+        <div className='my-5 p-5 container card center-card mx-auto position-relative'>
           <h1 className='mb-3'>
             Register <span>Below</span>
           </h1>
@@ -126,8 +126,8 @@ class Register extends Component {
               className='btn btn-danger btn-block mt-2 pl-5 pr-5 pt-2 pb-2'
             >
               {this.state.loading ? (
-                <div class='spinner-border' role='status'>
-                  <span class='sr-only'>Loading...</span>
+                <div className='spinner-border' role='status'>
+                  <span className='sr-only'>Loading...</span>
                 </div>
               ) : (
                 <span>Register</span>
@@ -135,7 +135,7 @@ class Register extends Component {
             </button>
           </form>
         </div>
-        {/* <Footer /> */}
+        <Footer />
       </div>
     );
   }
