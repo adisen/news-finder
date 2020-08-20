@@ -5,7 +5,7 @@ import Spinner from "../layouts/Spinner";
 
 class Home extends Component {
   componentDidMount() {
-    // this.props.initialLoad();
+    this.props.initialLoad();
   }
 
   state = {
@@ -53,26 +53,6 @@ class Home extends Component {
             </div>
           </div>
         </form>
-
-        <div>
-          <p className='d-inline-block mr-4'>
-            {" "}
-            <i className='fas fa-chart-line mr-2 '></i>{" "}
-            <strong>Trending Topics: </strong>
-          </p>
-          {this.props.trendingTopics.map(topic => {
-            return (
-              <button
-                key={topic.id}
-                onClick={this.onButtonClick}
-                value={topic.name}
-                className='btn btn-danger px-4 py-1 mr-3 mb-3'
-              >
-                {topic.name}
-              </button>
-            );
-          })}
-        </div>
 
         {this.props.loading ? <Spinner /> : <News news={this.props.news} />}
       </div>

@@ -6,35 +6,12 @@ const router = express.Router();
 // @desc    Get trending articles
 // @access  Private
 router.get("/trending", async (req, res) => {
-  const params = {
-    api_key: process.env.BREAKING_API,
-    type: "headlines",
-    locale: "en-US",
-    q: "trending",
-  };
   try {
-    const response = await axios.get("https://api.breakingapi.com/news", {
-      params,
-    });
+    const response = await axios.get(
+      `https://newsapi.org/v2/top-headlines?country=us&apiKey=${process.env.NEWS_API}`
+    );
 
     res.json({ articles: response.data.articles });
-  } catch (error) {
-    console.error(error);
-  }
-});
-
-router.get("/topics", async (req, res) => {
-  const params = {
-    api_key: process.env.BREAKING_API,
-    locale: "en-US",
-  };
-
-  try {
-    const response = await axios.get("https://api.breakingapi.com/trending", {
-      params,
-    });
-
-    res.json({ trendingTopics: response.data.trending_topics });
   } catch (error) {
     console.error(error);
   }
@@ -44,20 +21,13 @@ router.get("/topics", async (req, res) => {
 // @desc    Get articles by search
 // @access  Private
 router.get("/search", async (req, res) => {
-  const params = {
-    api_key: process.env.BREAKING_API,
-    type: "headlines",
-    locale: "en-US",
-    q: req.query.text,
-  };
-
   // console.log(req.query.text);
 
   console.log("Running");
   try {
-    const response = await axios.get("https://api.breakingapi.com/news", {
-      params,
-    });
+    const response = await axios.get(
+      `https://newsapi.org/v2/everything?q=${req.query.text}&apiKey=${process.env.NEWS_API}`
+    );
     // console.log(response);
 
     res.json({ articles: response.data.articles });

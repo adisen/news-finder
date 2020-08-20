@@ -47,59 +47,7 @@ class App extends Component {
     articles: [],
     article: {},
     loading: false,
-    author: {},
-    trendingTopics: [
-      {
-        id: "puppy",
-        name: "Puppy",
-        locales: ["en-US", "en-GB"],
-      },
-      {
-        id: "bolivia",
-        name: "Bolivia",
-        locales: ["en-US"],
-      },
-      {
-        id: "appeal",
-        name: "Appeal",
-        locales: ["en-US"],
-      },
-      {
-        id: "united-states-department-of-homeland-security",
-        name: "United States Department of Homeland Security",
-        locales: ["en-US"],
-      },
-      {
-        id: "turkey",
-        name: "Turkey",
-        locales: ["en-US"],
-      },
-      {
-        id: "donald-trump",
-        name: "Donald Trump",
-        locales: ["en-US", "en-GB"],
-      },
-      {
-        id: "north-carolina",
-        name: "North Carolina",
-        locales: ["en-US"],
-      },
-      {
-        id: "dominican-republic",
-        name: "Dominican Republic",
-        locales: ["en-US"],
-      },
-      {
-        id: "impeachment",
-        name: "Impeachment",
-        locales: ["en-US", "en-GB"],
-      },
-      {
-        id: "recep-tayyip-erdogan",
-        name: "Recep Tayyip Erdoğan",
-        locales: ["en-US"],
-      },
-    ],
+    authorDetails: {},
   };
 
   // Get trending articles
@@ -107,11 +55,9 @@ class App extends Component {
     this.setState({ loading: true });
 
     try {
-      const art = await axios.get("/api/news/trending");
-      const top = await axios.get("/api/news/topics");
+      const res = await axios.get("/api/news/trending");
       this.setState({
-        articles: art.data.articles,
-        trendingTopics: top.data.trendingTopics,
+        articles: res.data.articles,
         loading: false,
       });
     } catch (error) {
@@ -129,27 +75,8 @@ class App extends Component {
 
     try {
       const res = await axios.get(`/api/news/search`, { params });
+
       this.setState({ articles: res.data.articles, loading: false });
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  // Get single article
-  getArticle = async link => {
-    // TODO: Get a single article are display
-    const params = {
-      link: `${link}`,
-    };
-
-    this.setState({ loading: true });
-
-    try {
-      const res = await axios.get("/api/news/article", {
-        params,
-      });
-      console.log(res.data);
-      this.setState({ article: res.data.article, loading: false });
     } catch (error) {
       console.error(error);
     }
@@ -168,8 +95,7 @@ class App extends Component {
       const res = await axios.get("/api/author/", {
         params,
       });
-      console.log(res.data);
-      this.setState({ author: res.data.author, loading: false });
+      this.setState({ authorDetails: res.data.author, loading: false });
     } catch (error) {
       this.setState({ loading: false });
       console.error(error);
@@ -209,7 +135,7 @@ class App extends Component {
                   getArticle={this.getArticle}
                   getAuthor={this.getAuthor}
                   article={this.state.article}
-                  author={this.state.author}
+                  authorDetails={this.state.authorDetails}
                   loading={this.state.loading}
                   component={Article}
                 />
