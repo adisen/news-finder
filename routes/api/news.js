@@ -8,10 +8,10 @@ const router = express.Router();
 router.get("/trending", async (req, res) => {
   try {
     const response = await axios.get(
-      `https://newsapi.org/v2/top-headlines?country=us&apiKey=${process.env.NEWS_API}`
+      `https://newsapi.org/v2/top-headlines?country=us&page=${req.query.page}&apiKey=${process.env.NEWS_API}`
     );
 
-    res.json({ articles: response.data.articles });
+    res.json({ articles: response.data });
   } catch (error) {
     console.error(error);
   }
@@ -21,16 +21,15 @@ router.get("/trending", async (req, res) => {
 // @desc    Get articles by search
 // @access  Private
 router.get("/search", async (req, res) => {
-  // console.log(req.query.text);
+  // console.log(req.query.page);
 
   console.log("Running");
   try {
     const response = await axios.get(
-      `https://newsapi.org/v2/everything?q=${req.query.text}&apiKey=${process.env.NEWS_API}`
+      `https://newsapi.org/v2/everything?q=${req.query.text}&page=${req.query.page}&apiKey=${process.env.NEWS_API}`
     );
-    // console.log(response);
 
-    res.json({ articles: response.data.articles });
+    res.json({ articles: response.data });
   } catch (error) {
     console.error(error);
   }

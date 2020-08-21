@@ -61,9 +61,41 @@ main {
   top: 0;
   bottom: 0;
   left: 0;
-  z-index: 100;
+  z-index: 9999;
   padding: 48px 0 0;
   box-shadow: inset -1px 0 0 rgba(0, 0, 0, 0.1);
+}
+
+.pagination {
+  width: 80%;
+  margin: auto;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+}
+
+.pagination li {
+  background-color: hsl(240, 5%, 93%);
+  display: inline-block;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  margin: 0.3rem;
+}
+
+.pagination li a {
+  display: inline-block;
+  padding: 1rem;
+}
+
+.pagination li:hover {
+  color: #fff;
+  background-color: #c93d34;
+}
+
+.page-active {
+  background-color: #c93d34 !important ;
+  color: #fff;
 }
 
 .center-card {

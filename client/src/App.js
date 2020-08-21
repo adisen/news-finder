@@ -49,16 +49,30 @@ class App extends Component {
     loading: false,
     authorDetails: {},
     trendingOutlets: [],
+    pagination: {
+      perPage: 20,
+    },
   };
 
   // Get trending articles
-  initialLoad = async () => {
+  initialLoad = async page => {
+    const params = {
+      page,
+    };
+
     this.setState({ loading: true });
 
     try {
-      const res = await axios.get("/api/news/trending");
+      const res = await axios.get("/api/news/trending", { params });
+      console.log(res.data.articles);
       this.setState({
-        articles: res.data.articles,
+        pagination: {
+          ...this.state.pagination,
+          pageCount: Math.ceil(
+            res.data.articles.totalResults / this.state.pagination.perPage
+          ),
+        },
+        articles: res.data.articles.articles,
         loading: false,
       });
     } catch (error) {
@@ -67,17 +81,28 @@ class App extends Component {
   };
 
   // Search articles
-  searchNews = async text => {
+  searchNews = async (text, page) => {
     const params = {
       text,
+      page,
     };
 
     this.setState({ loading: true });
 
     try {
       const res = await axios.get(`/api/news/search`, { params });
+      console.log(res.data);
 
-      this.setState({ articles: res.data.articles, loading: false });
+      this.setState({
+        pagination: {
+          ...this.state.pagination,
+          pageCount: Math.ceil(
+            res.data.articles.totalResults / this.state.pagination.perPage
+          ),
+        },
+        articles: res.data.articles.articles,
+        loading: false,
+      });
     } catch (error) {
       console.error(error);
     }
@@ -118,6 +143,7 @@ class App extends Component {
                   searchNews={this.searchNews}
                   news={this.state.articles}
                   loading={this.state.loading}
+                  pagination={this.state.pagination}
                   initialLoad={this.initialLoad}
                   trendingTopics={this.state.trendingTopics}
                   component={Home}
@@ -127,6 +153,7 @@ class App extends Component {
                   path='/search'
                   searchNews={this.searchNews}
                   news={this.state.articles}
+                  pagination={this.state.pagination}
                   loading={this.state.loading}
                   initialLoad={this.initialLoad}
                   component={Search}
