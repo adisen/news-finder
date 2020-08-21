@@ -5,14 +5,16 @@ import News from "../news/News";
 import Spinner from "../layouts/Spinner";
 
 class Home extends Component {
-  componentDidMount() {
-    this.props.initialLoad();
-  }
-
   state = {
     text: "",
     page: 1,
   };
+
+  outlets = [];
+
+  componentDidMount() {
+    this.props.initialLoad();
+  }
 
   onChange = e => {
     this.setState({ [e.target.name]: e.target.value });
@@ -40,10 +42,16 @@ class Home extends Component {
   };
 
   render() {
-    console.log(this.props.pagination);
+    // console.log(this.props.pagination);
+    this.props.news.map(article => {
+      if (!this.outlets.includes(article.source.name)) {
+        this.outlets.push(article.source.name);
+      }
+    });
+    console.log(this.outlets);
     const { pageCount } = this.props.pagination;
     return (
-      <div className='px-4'>
+      <div className='px-5'>
         <form onSubmit={this.onSubmit} className='mb-5 mt-5'>
           <div className='row justify-content-md-center'>
             <div className='col-8'>
@@ -75,18 +83,18 @@ class Home extends Component {
             <i className='fas fa-chart-line mr-2 '></i>{" "}
             <strong>Trending Outlets: </strong>
           </p>
-          {/* {this.props.trendingTopics.map(topic => {
+          {this.outlets.map(source => {
             return (
               <button
-                key={topic.id}
-                onClick={this.onButtonClick}
-                value={topic.name}
+                key={source}
+                // onClick={this.onButtonClick}
+                value={source}
                 className='btn btn-danger px-4 py-1 mr-3 mb-3'
               >
-                {topic.name}
+                {source}
               </button>
             );
-          })} */}
+          })}
         </div>
 
         {this.props.loading ? <Spinner /> : <News news={this.props.news} />}

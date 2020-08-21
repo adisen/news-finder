@@ -34,7 +34,7 @@ class Search extends Component {
   render() {
     const { pageCount } = this.props.pagination;
     return (
-      <div className='mt-5 px-4'>
+      <div className='mt-5 px-5'>
         <h2 className='mt-5 text-dark text-center'>
           <strong>Search your favorite Article</strong>
         </h2>

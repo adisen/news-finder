@@ -4,7 +4,7 @@ import moment from "moment";
 
 const Footer = () => {
   return (
-    <footer className='text-light pt-4 pb-4'>
+    <footer className='text-light pt-4 pb-4 px-5'>
       <div className='container'>
         <div className='row'>
           <div className='col-lg col-sm-12'>
