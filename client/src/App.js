@@ -48,6 +48,7 @@ class App extends Component {
     article: {},
     loading: false,
     authorDetails: {},
+    trendingOutlets: [],
   };
 
   // Get trending articles

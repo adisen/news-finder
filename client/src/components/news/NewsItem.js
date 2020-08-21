@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const NewsItem = ({ details }) => {
   return (
     <div className='col-lg-3 col-sm-12 mb-4'>
-      <div className='card mt-3'>
+      <div className='card mt-3 h-100'>
         <img src={details.urlToImage} className='card-img-top' alt='News'></img>
         <div className='card-body mb-3'>
           <h6 className='card-title text-dark'>

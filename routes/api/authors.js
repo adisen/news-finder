@@ -20,7 +20,7 @@ router.get("/", async (req, res) => {
     res.json({ author: resp.data[0] });
   } catch (error) {
     res.json({ author: {} });
-    // console.error(error);
+    console.error(error);
   }
 });
 

@@ -26,7 +26,7 @@ class Article extends Component {
     }
 
     return (
-      <div style={{ background: "#FCFCFC" }} className='px-4'>
+      <div style={{ background: "#FCFCFC" }} className='px-4 mb-5'>
         <Link to='/' className='btn btn-secondary mt-4'>
           <i className='fas fa-arrow-left'></i>
           {"  "}
@@ -53,7 +53,11 @@ class Article extends Component {
               </a>
             </div>
             <div className='col-lg'>
-              <Author author={authorDetails} author_name={author} />
+              {/* Do not render except there is author's details */}
+              {Object.keys(authorDetails).length === 0 &&
+              authorDetails.constructor === Object ? null : (
+                <Author author={authorDetails} author_name={author} />
+              )}
             </div>
           </div>
         )}

@@ -54,6 +54,26 @@ class Home extends Component {
           </div>
         </form>
 
+        <div>
+          <p className='d-inline-block mr-4'>
+            {" "}
+            <i className='fas fa-chart-line mr-2 '></i>{" "}
+            <strong>Trending Outlets: </strong>
+          </p>
+          {/* {this.props.trendingTopics.map(topic => {
+            return (
+              <button
+                key={topic.id}
+                onClick={this.onButtonClick}
+                value={topic.name}
+                className='btn btn-danger px-4 py-1 mr-3 mb-3'
+              >
+                {topic.name}
+              </button>
+            );
+          })} */}
+        </div>
+
         {this.props.loading ? <Spinner /> : <News news={this.props.news} />}
       </div>
     );
