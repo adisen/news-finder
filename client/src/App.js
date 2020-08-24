@@ -64,7 +64,7 @@ class App extends Component {
 
     try {
       const res = await axios.get("/api/news/trending", { params });
-      console.log(res.data.articles);
+
       this.setState({
         pagination: {
           ...this.state.pagination,
@@ -91,7 +91,32 @@ class App extends Component {
 
     try {
       const res = await axios.get(`/api/news/search`, { params });
-      console.log(res.data);
+
+      this.setState({
+        pagination: {
+          ...this.state.pagination,
+          pageCount: Math.ceil(
+            res.data.articles.totalResults / this.state.pagination.perPage
+          ),
+        },
+        articles: res.data.articles.articles,
+        loading: false,
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  searchBySource = async (source, page) => {
+    const params = {
+      source,
+      page,
+    };
+
+    this.setState({ loading: true });
+
+    try {
+      const res = await axios.get(`/api/news/searchBySouce`, { params });
 
       this.setState({
         pagination: {
@@ -141,6 +166,7 @@ class App extends Component {
                   exact
                   path='/'
                   searchNews={this.searchNews}
+                  searchBySource={this.searchBySource}
                   news={this.state.articles}
                   loading={this.state.loading}
                   pagination={this.state.pagination}

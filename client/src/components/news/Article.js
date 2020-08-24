@@ -9,7 +9,6 @@ moment().format();
 
 class Article extends Component {
   componentDidMount() {
-    console.log(this.props.location.state.details);
     const { details } = this.props.location.state;
     this.props.getAuthor(details.author, details.source.name);
   }

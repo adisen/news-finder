@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 import image from "../../assets/img/placeholder.jpg";
 
 const Profile = ({ auth }) => {
-  console.log(auth.user);
   return (
     <div className='px-4 mt-5'>
       <div className='card text-center m-auto mw-100 w-50'>

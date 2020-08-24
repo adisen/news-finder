@@ -23,7 +23,7 @@ class Search extends Component {
   onPageChange = data => {
     let selected = data.selected;
     this.setState({ page: selected + 1 });
-    // console.log(this.state.text)
+
     if (this.state.text === "") {
       this.props.initialLoad(this.state.page);
     } else {

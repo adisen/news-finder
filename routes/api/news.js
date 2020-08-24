@@ -22,8 +22,6 @@ router.get("/trending", async (req, res) => {
 // @access  Private
 router.get("/search", async (req, res) => {
   // console.log(req.query.page);
-
-  console.log("Running");
   try {
     const response = await axios.get(
       `https://newsapi.org/v2/everything?q=${req.query.text}&page=${req.query.page}&apiKey=${process.env.NEWS_API}`
@@ -35,22 +33,15 @@ router.get("/search", async (req, res) => {
   }
 });
 
-// @route   GET api/news/article
-// @desc    Get single article
-// @access  Private
-router.get("/article", async (req, res) => {
-  const params = {
-    api_key: process.env.BREAKING_API,
-    link: req.query.link,
-  };
+router.get("/searchBySouce", async (req, res) => {
+  // console.log(req.query.source);
 
-  console.log("Running");
   try {
-    const response = await axios.get("https://api.breakingapi.com/articles", {
-      params,
-    });
+    const response = await axios.get(
+      `https://newsapi.org/v2/everything?sources=${req.query.source}&page=${req.query.page}&apiKey=${process.env.NEWS_API}`
+    );
 
-    res.json({ article: response.data.article });
+    res.json({ articles: response.data });
   } catch (error) {
     console.error(error);
   }

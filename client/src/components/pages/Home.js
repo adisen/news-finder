@@ -27,13 +27,13 @@ class Home extends Component {
   };
 
   onButtonClick = e => {
-    this.props.searchNews(e.target.value);
+    this.props.searchBySource(e.target.value, this.state.page);
   };
 
   onPageChange = data => {
     let selected = data.selected;
     this.setState({ page: selected + 1 });
-    // console.log(this.state.text)
+
     if (this.state.text === "") {
       this.props.initialLoad(this.state.page);
     } else {
@@ -42,17 +42,20 @@ class Home extends Component {
   };
 
   render() {
-    // console.log(this.props.pagination);
     this.props.news.map(article => {
-      if (!this.outlets.includes(article.source.name)) {
-        this.outlets.push(article.source.name);
+      const exists = this.outlets.some(el => el.name === article.source.name);
+      if (article.source.id === null) {
+        return;
+      }
+      if (!exists) {
+        this.outlets.push(article.source);
       }
     });
-    console.log(this.outlets);
     const { pageCount } = this.props.pagination;
+
     return (
       <div className='px-5'>
-        <form onSubmit={this.onSubmit} className='mb-5 mt-5'>
+        {/* <form onSubmit={this.onSubmit} className='mb-5 mt-5'>
           <div className='row justify-content-md-center'>
             <div className='col-8'>
               <input
@@ -75,9 +78,9 @@ class Home extends Component {
               </button>
             </div>
           </div>
-        </form>
+        </form> */}
 
-        <div>
+        <div className='mt-5'>
           <p className='d-inline-block mr-4'>
             {" "}
             <i className='fas fa-chart-line mr-2 '></i>{" "}
@@ -86,12 +89,12 @@ class Home extends Component {
           {this.outlets.map(source => {
             return (
               <button
-                key={source}
-                // onClick={this.onButtonClick}
-                value={source}
+                key={source.id}
+                onClick={this.onButtonClick}
+                value={source.id}
                 className='btn btn-danger px-4 py-1 mr-3 mb-3'
               >
-                {source}
+                {source.name}
               </button>
             );
           })}
