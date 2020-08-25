@@ -35,7 +35,7 @@ class Article extends Component {
           <h1>Loading...</h1>
         ) : (
           <div className='row mt-5'>
-            <div className='col-lg-8 col-sm-12'>
+            <div className='col-lg-8 col-sm-12 mb-5'>
               <h5 className='mb-5 text-dark'>
                 <i className='far fa-calendar-alt red-icon mr-2'></i>
                 {"  "}
