@@ -16,6 +16,7 @@ import Register from "./components/auth/Register";
 import PrivateRoute from "./utils/PrivateRoute";
 import Search from "./components/pages/Search";
 import Profile from "./components/pages/Profile";
+import PressRelease from "./components/pages/PressRelease";
 
 dotenv.config();
 
@@ -183,6 +184,11 @@ class App extends Component {
                   loading={this.state.loading}
                   initialLoad={this.initialLoad}
                   component={Search}
+                />
+                <PrivateRoute
+                  exact
+                  path='/pressrelease'
+                  component={PressRelease}
                 />
                 <PrivateRoute
                   path='/article/:link'

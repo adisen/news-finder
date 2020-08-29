@@ -27,6 +27,12 @@ const SideBar = () => {
               <strong>Search Articles</strong>
             </Link>
           </li>
+          <li className='nav-item mb-3'>
+            <Link className='nav-link text-light' to='/pressrelease'>
+              <i className='fas fa-newspaper mr-2'></i>
+              <strong>Press Release</strong>
+            </Link>
+          </li>
           <li className='nav-item'>
             <Link className='nav-link text-light' to='/profile'>
               <i className='fas fa-user mr-2'></i>
