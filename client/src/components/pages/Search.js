@@ -36,7 +36,7 @@ class Search extends Component {
     return (
       <div className='mt-5 px-5'>
         <h2 className='mt-5 text-dark text-center'>
-          <strong>Search Articles</strong>
+          <strong>Search articles...</strong>
         </h2>
         <form onSubmit={this.onSubmit} className='mb-5'>
           <div className='row justify-content-md-center'>
