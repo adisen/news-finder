@@ -7,8 +7,9 @@ import Spinner from "../layouts/Spinner";
 class Search extends Component {
   state = {
     text: "",
-    page: 1,
   };
+
+  page = 1;
 
   onChange = e => {
     this.setState({ [e.target.name]: e.target.value });
@@ -16,25 +17,26 @@ class Search extends Component {
 
   onSubmit = e => {
     e.preventDefault();
-    this.props.searchNews(this.state.text);
+    this.props.searchNews(this.state.text, this.page);
     // this.setState({ text: "" });
   };
 
   onPageChange = data => {
     let selected = data.selected;
-    this.setState({ page: selected + 1 });
+    this.page = selected + 1;
+    console.log(this.page, selected);
 
     if (this.state.text === "") {
-      this.props.initialLoad(this.state.page);
+      this.props.initialLoad(this.page);
     } else {
-      this.props.searchNews(this.state.text, this.state.page);
+      this.props.searchNews(this.state.text, this.page);
     }
   };
 
   render() {
     const { pageCount } = this.props.pagination;
     return (
-      <div className='mt-5 px-5'>
+      <div className='mt-5 px-5' style={{ minHeight: "80vh" }}>
         <h2 className='mt-5 text-dark text-center'>
           <strong>Search articles...</strong>
         </h2>

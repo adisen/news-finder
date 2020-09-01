@@ -7,44 +7,48 @@ import Spinner from "../layouts/Spinner";
 class Home extends Component {
   state = {
     text: "",
-    page: 1,
   };
+
+  page = 1;
+  source = "";
 
   outlets = [];
 
   componentDidMount() {
-    this.props.initialLoad();
+    this.props.initialLoad(this.state.page);
   }
 
   onChange = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
 
-  onSubmit = e => {
-    e.preventDefault();
-    this.props.searchNews(this.state.text, this.state.page);
-    // this.setState({ text: "" });
-  };
-
   onButtonClick = e => {
-    this.props.searchBySource(e.target.value, this.state.page);
+    // this.setState({ source: e.target.value });
+    this.source = e.target.value;
+    console.log(this.source);
+    this.props.searchBySource(this.source, this.page);
   };
 
   onPageChange = data => {
     let selected = data.selected;
-    this.setState({ page: selected + 1 });
+    this.page = selected + 1;
+    console.log(this.page);
 
-    if (this.state.text === "") {
-      this.props.initialLoad(this.state.page);
+    if (this.state.text === "" && this.state.source === "") {
+      this.props.initialLoad(this.page);
+    } else if (!(this.source === "")) {
+      this.props.searchBySource(this.source, this.page);
     } else {
-      this.props.searchNews(this.state.text, this.state.page);
+      this.props.searchNews(this.state.text, this.page);
     }
   };
 
   render() {
+    // eslint-disable-next-line
     this.props.news.map(article => {
       const exists = this.outlets.some(el => el.name === article.source.name);
       if (article.source.id === null) {
+        // eslint-disable-next-line
         return;
       }
       if (!exists) {
@@ -54,7 +58,7 @@ class Home extends Component {
     const { pageCount } = this.props.pagination;
 
     return (
-      <div className='px-5'>
+      <div className='px-5' style={{ minHeight: "80vh" }}>
         {/* <form onSubmit={this.onSubmit} className='mb-5 mt-5'>
           <div className='row justify-content-md-center'>
             <div className='col-8'>

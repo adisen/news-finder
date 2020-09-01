@@ -2,7 +2,7 @@ import React from "react";
 
 const PressRelease = () => {
   return (
-    <div className='px-1'>
+    <div className='px-1' style={{ minHeight: "80vh" }}>
       <iframe
         className='airtable-embed'
         title='Press Release'
